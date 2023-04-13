@@ -1,0 +1,23 @@
+% logThingSpeakData
+% This function is used by PeopleCounterDemo.m to write data to a
+% ThingSpeak channel. 
+%
+% Copyright 2016 The MathWorks, Inc
+
+function logThingSpeakData(totalEntry)
+
+channelID = 1731876;
+writeKey = 'PA8LFRO2UZPHOOTB';
+
+if ischar(tracker1) && strcmp(tracker1,'reset')
+    thingSpeakWrite(channelID,[0 0],'WriteKey',writeKey)
+else
+    data = [0 0];
+    data(1) = insideStore
+    data(2) = numel(tracker1.BoxIds);
+    
+    try
+    thingSpeakWrite(channelID,data,'WriteKey',writeKey,'Timeout',5)
+    catch
+    end
+end
